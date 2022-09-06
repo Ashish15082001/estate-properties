@@ -1,0 +1,15 @@
+/* .grid-container {
+  border: 1px solid blue;
+} */
+
+.grid {
+  /* border: 1px solid red; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  list-style: none;
+}
+
+/* .grid-item {
+  border: 1px solid orange;
+} */

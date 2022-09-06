@@ -1,0 +1,23 @@
+.button {
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-size: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button[data-type="primary"] {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border: 0.1rem solid var(--color-primary);
+}
+
+.button[data-type="secondary"] {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border: 0.1rem solid var(--color-primary);
+}

@@ -1,0 +1,10 @@
+.page-body {
+  display: grid;
+  place-items: center;
+}
+
+.page-body > p {
+  color: var(--color-font);
+  font-size: var(--font-large);
+  font-weight: var(--font-bold);
+}
