@@ -4,11 +4,11 @@ import Grid from "../grid/Grid";
 import ArrowDownIcon from "../../icons/ArrowDownIcon";
 import Filter from "../filter/Filter";
 
-function MainBody({ propertiesIds }) {
+function MainBody({ propertiesIds, megaLabel }) {
   return (
     <div className={styles["main-body"]}>
       <div className={styles["flex-container"]}>
-        <h1>Search properties to rent</h1>
+        <h1>{megaLabel}</h1>
         <div className={styles["input-container"]}>
           <input placeholder="Seach with Seach Bar" />
           <span>

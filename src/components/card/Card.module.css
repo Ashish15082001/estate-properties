@@ -6,7 +6,7 @@
 }
 
 .card:hover {
-  box-shadow: 0 0 2rem 0.1rem var(--color-font-faded);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .card-image {
@@ -65,11 +65,11 @@
 }
 
 .fav-icon-container > span:hover {
-    scale: 1.1;
+  scale: 1.1;
 }
 
 .fav-icon-container > span:active {
-    scale: 1;
+  scale: 1;
 }
 
 .fav-icon-container > span path {

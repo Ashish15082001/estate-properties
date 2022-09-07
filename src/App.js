@@ -6,6 +6,7 @@ import MainHeader from "./components/main header/MainHeader";
 import { Routes, Route, Navigate } from "react-router-dom";
 import RentPage from "./pages/rent page/RentPage";
 import PlaceHolderPage from "./pages/placeholder page/PlaceHolderPage";
+import FavouritesPage from "./pages/favourites page/FavouritesPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/rent" />}></Route>
         <Route path="/rent" element={<RentPage />}></Route>
+        <Route path="/favourites" element={<FavouritesPage />}></Route>
         <Route
           path="*"
           element={

@@ -18,6 +18,11 @@ function MainHeader() {
             </Link>
           </li>
           <li className={styles["navigation-option"]}>
+            <Link to={"/favourites"} data-active={pathname === "/favourites"}>
+              Favourites
+            </Link>
+          </li>
+          <li className={styles["navigation-option"]}>
             <Link to={"/buy"} data-active={pathname === "/buy"}>
               Buy
             </Link>

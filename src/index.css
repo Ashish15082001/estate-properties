@@ -37,6 +37,8 @@ body {
 
   --border-radius-sharp: 0.5rem;
   --border-radius-round: 1rem;
+
+  --box-shadow-medium: 0 0 2rem 0.1rem var(--color-font-faded);
 }
 
 :root {

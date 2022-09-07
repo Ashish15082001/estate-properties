@@ -11,16 +11,16 @@ function RentPage() {
   const { propertiesIds, status } = useSelector(
     (state) => state.properties.propertiesToRent
   );
+  const { filter } = useSelector((state) => state.properties);
 
   useEffect(() => {
     async function fetchPropertiesToRent() {
       const promise = await dispatch(fetchPropertiesToRentThunk());
-      console.log(promise);
+
       if (promise.error) throw new Error();
     }
 
     if (propertiesIds.length === 0) {
-      // fetchPropertiesToRent();
       toast.promise(fetchPropertiesToRent, {
         pending: "Fetching properties to rent.",
         success: "Successfully fetched properties to rent.",
@@ -40,7 +40,12 @@ function RentPage() {
       <PlaceHolderPage placeHolderText={"No Properties available to rent."} />
     );
 
-  return <MainBody propertiesIds={propertiesIds} />;
+  return (
+    <MainBody
+      propertiesIds={propertiesIds}
+      megaLabel="Search properties to rent"
+    />
+  );
 }
 
 export default RentPage;

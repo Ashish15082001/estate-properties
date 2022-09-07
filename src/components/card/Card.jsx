@@ -19,8 +19,9 @@ function Card({ propertyId }) {
   } = useSelector((state) => state.properties.entities[propertyId]);
   const dispatch = useDispatch();
   const isFavourite = useSelector((state) =>
-    state.properties.favouriteProperties[propertyId] ? true : false
+    state.properties.favouritePropertiesIds[propertyId] ? true : false
   );
+
   function toggleFavourite() {
     dispatch(addPropertyToFavourite({ propertyId }));
     isFavourite
