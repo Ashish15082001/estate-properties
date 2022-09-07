@@ -47,7 +47,7 @@ body {
   min-height: 100vh;
   background-color: var(--color-secondary);
   display: grid;
-  grid-template-rows: 10rem 1fr;
+  grid-template-rows: 0rem 10rem 1fr;
   background-color: var(--color-purple-grey);
   padding-bottom: 10rem;
   position: relative;

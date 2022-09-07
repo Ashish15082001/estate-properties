@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import MainBody from "../../components/main body/MainBody";
 import { dataStatus } from "../../constants/dataStatus";
 import { fetchPropertiesToRentThunk } from "../../store/slices/properties/fetchPropertiesToRentThunk";
@@ -13,11 +14,19 @@ function RentPage() {
 
   useEffect(() => {
     async function fetchPropertiesToRent() {
-      const promiseValue = await dispatch(fetchPropertiesToRentThunk());
-      console.log("promise value ", promiseValue);
+      const promise = await dispatch(fetchPropertiesToRentThunk());
+      console.log(promise);
+      if (promise.error) throw new Error();
     }
 
-    if (propertiesIds.length === 0) fetchPropertiesToRent();
+    if (propertiesIds.length === 0) {
+      // fetchPropertiesToRent();
+      toast.promise(fetchPropertiesToRent, {
+        pending: "Fetching properties to rent.",
+        success: "Successfully fetched properties to rent.",
+        error: "Failed to fetch properties to rent.",
+      });
+    }
   }, [dispatch, propertiesIds.length]);
 
   if (status === dataStatus.fetching)
