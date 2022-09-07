@@ -53,6 +53,11 @@ body {
   position: relative;
 }
 
+.Toastify__toast-body {
+  font-size: var(--font-small);
+  color: var(--color-font);
+}
+
 ::-webkit-scrollbar {
   width: 1rem;
 }

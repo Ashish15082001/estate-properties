@@ -8,6 +8,7 @@ import { addPropertyToFavourite } from "../../store/slices/properties/properties
 import styles from "./Card.module.css";
 import AddToFavouriteIcon from "../../icons/AddToFavouriteIcon";
 import FavouriteIcon from "../../icons/FavouriteIcon";
+import { toast } from "react-toastify";
 
 function Card({ propertyId }) {
   const {
@@ -20,8 +21,27 @@ function Card({ propertyId }) {
   const isFavourite = useSelector((state) =>
     state.properties.favouriteProperties[propertyId] ? true : false
   );
-  function addToFavourite() {
+  function toggleFavourite() {
     dispatch(addPropertyToFavourite({ propertyId }));
+    isFavourite
+      ? toast(`Removed "${propertyName}" from favourites.`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      : toast(`Added "${propertyName}" to favourites.`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
   }
 
   return (
@@ -48,7 +68,7 @@ function Card({ propertyId }) {
             <p className={styles["property-name"]}>{propertyName}</p>
           </div>
           <div className={styles["fav-icon-container"]}>
-            <span onClick={addToFavourite}>
+            <span onClick={toggleFavourite}>
               {isFavourite ? <FavouriteIcon /> : <AddToFavouriteIcon />}
             </span>
           </div>
