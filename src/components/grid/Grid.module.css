@@ -13,3 +13,10 @@
 /* .grid-item {
   border: 1px solid orange;
 } */
+
+.grid-container-message {
+  margin-top: 10rem;
+  text-align: center;
+  font-size: var(--font-medium);
+  color: var(--color-font-faded);
+}
