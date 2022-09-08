@@ -4,9 +4,9 @@ No custom ui libraries were used.
 ## Available Scripts
 Features under development.
 
->Search feature for searching properties.
->Filter feature for favourites page.
->Others pages.
+- Search feature for searching properties.
+- Filter feature for favourites page.
+- Others pages.
 
 # Getting Started with Create React App
 
