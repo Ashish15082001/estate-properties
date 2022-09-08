@@ -21,3 +21,8 @@
   color: var(--color-primary);
   border: 0.1rem solid var(--color-primary);
 }
+
+.button:disabled {
+  cursor: no-drop;
+  background-color: var(--color-font-faded);
+}

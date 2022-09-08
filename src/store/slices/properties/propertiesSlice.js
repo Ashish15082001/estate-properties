@@ -2,6 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { dataStatus } from "../../../constants/dataStatus";
 import { fetchPropertiesToRentThunk } from "./fetchPropertiesToRentThunk";
 
+const initialFilter = {
+  priceRange: null,
+  propertyType: null,
+  location: null,
+  plannedDate: null,
+};
+
 const initialState = {
   entities: {},
   favouritePropertiesIds: {},
@@ -15,12 +22,7 @@ const initialState = {
     filteredPropertiesIds: [],
     status: dataStatus.idle,
   },
-  filter: {
-    priceRange: null,
-    propertyType: null,
-    location: null,
-    plannedDate: null,
-  },
+  filter: initialFilter,
 };
 
 export const propertiesSlice = createSlice({
@@ -48,6 +50,13 @@ export const propertiesSlice = createSlice({
     setFilterPlannedDate(state, action) {
       const { plannedDate } = action.payload;
       state.filter.plannedDate = plannedDate;
+    },
+    resetFilter(state) {
+      state.filter = initialFilter;
+      state.propertiesToRent.filteredPropertiesIds =
+        state.propertiesToRent.propertiesIds;
+      state.propertiesToBuy.filteredPropertiesIds =
+        state.propertiesToBuy.propertiesIds;
     },
     applyFilterToPropertiesToRent(state) {
       const filteredPropertiesToRent = [];
@@ -114,4 +123,5 @@ export const {
   setFilterPriceRange,
   setFilterPropertyType,
   applyFilterToPropertiesToRent,
+  resetFilter,
 } = propertiesSlice.actions;

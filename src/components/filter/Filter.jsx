@@ -305,7 +305,12 @@ function Filter({ handleApplyFilter }) {
         </li>
       </ul>
       <div>
-        <Button label="Search" type="primary" onClick={handleApplyFilter} />
+        <Button
+          label="Search"
+          type="primary"
+          onClick={handleApplyFilter}
+          disabled={!location && !plannedDate && !priceRange && !propertyType}
+        />
       </div>
     </div>
   );

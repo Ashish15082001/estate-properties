@@ -17,6 +17,15 @@ function RentPage() {
   );
 
   function handleApplyFilter() {
+    toast(`Filteres have been applied`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
     dispatch(applyFilterToPropertiesToRent());
   }
 
@@ -40,10 +49,6 @@ function RentPage() {
         placeHolderText={"Fetching propeties to rent. Please wait."}
       />
     );
-  // if (status === dataStatus.idle && propertiesIds.length === 0)
-  //   return (
-  //     <PlaceHolderPage placeHolderText={"No Properties available to rent."} />
-  //   );
 
   return (
     <MainBody
