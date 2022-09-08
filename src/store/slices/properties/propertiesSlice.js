@@ -7,10 +7,12 @@ const initialState = {
   favouritePropertiesIds: {},
   propertiesToRent: {
     propertiesIds: [],
+    filteredPropertiesIds: [],
     status: dataStatus.idle,
   },
   propertiesToBuy: {
     propertiesIds: [],
+    filteredPropertiesIds: [],
     status: dataStatus.idle,
   },
   filter: {
@@ -31,16 +33,58 @@ export const propertiesSlice = createSlice({
         delete state.favouritePropertiesIds[propertyId];
       else state.favouritePropertiesIds[propertyId] = propertyId;
     },
-    setFilterForRent(state, action) {
-      const { priceRange, propertyType, location, plannedDate } =
-        action.payload;
+    setFilterPriceRange(state, action) {
+      const { priceRange } = action.payload;
+      state.filter.priceRange = priceRange;
+    },
+    setFilterPropertyType(state, action) {
+      const { propertyType } = action.payload;
+      state.filter.propertyType = propertyType;
+    },
+    setFilterLocation(state, action) {
+      const { location } = action.payload;
+      state.filter.location = location;
+    },
+    setFilterPlannedDate(state, action) {
+      const { plannedDate } = action.payload;
+      state.filter.plannedDate = plannedDate;
+    },
+    applyFilterToPropertiesToRent(state) {
+      const filteredPropertiesToRent = [];
+      const targetFilters = Object.keys(state.filter).filter(
+        (filterKey) => state.filter[filterKey] !== null
+      );
 
-      state.filter = {
-        priceRange,
-        propertyType,
-        location,
-        plannedDate,
-      };
+      function isPropertyMatchingTargetFilters(propertyId) {
+        for (const targetFilter of targetFilters) {
+          if (targetFilter === "priceRange") {
+            if (
+              !(
+                state.entities[propertyId].price >=
+                  state.filter[targetFilter].min &&
+                state.entities[propertyId].price <=
+                  state.filter[targetFilter].max
+              )
+            )
+              return false;
+          } else {
+            if (
+              state.entities[propertyId][targetFilter] !==
+              state.filter[targetFilter]
+            )
+              return false;
+          }
+        }
+
+        return true;
+      }
+
+      state.propertiesToRent.propertiesIds.forEach((propertyId) => {
+        if (isPropertyMatchingTargetFilters(propertyId) === true)
+          filteredPropertiesToRent.push(propertyId);
+      });
+
+      state.propertiesToRent.filteredPropertiesIds = filteredPropertiesToRent;
     },
   },
   extraReducers: (builder) => {
@@ -53,6 +97,7 @@ export const propertiesSlice = createSlice({
         const propertyKeys = Object.keys(entities);
         state.propertiesToRent.status = dataStatus.idle;
         state.propertiesToRent.propertiesIds = propertyKeys;
+        state.propertiesToRent.filteredPropertiesIds = propertyKeys;
         state.entities = { ...state.entities, ...entities };
       })
       .addCase(fetchPropertiesToRentThunk.rejected, (state, action) => {
@@ -62,5 +107,11 @@ export const propertiesSlice = createSlice({
 });
 
 export const propertiesSliceReducer = propertiesSlice.reducer;
-export const { addPropertyToFavourite, setFilterForRent } =
-  propertiesSlice.actions;
+export const {
+  addPropertyToFavourite,
+  setFilterLocation,
+  setFilterPlannedDate,
+  setFilterPriceRange,
+  setFilterPropertyType,
+  applyFilterToPropertiesToRent,
+} = propertiesSlice.actions;

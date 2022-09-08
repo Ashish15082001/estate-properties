@@ -12,10 +12,14 @@ import { toast } from "react-toastify";
 
 function Card({ propertyId }) {
   const {
-    currentPrice,
+    price,
     availableFor,
     imageUrl,
-    basicInfo: { propertyName, bedRooms, bathRooms, area, address },
+    propertyName,
+    bedRooms,
+    bathRooms,
+    area,
+    address,
   } = useSelector((state) => state.properties.entities[propertyId]);
   const dispatch = useDispatch();
   const isFavourite = useSelector((state) =>
@@ -63,7 +67,7 @@ function Card({ propertyId }) {
           </div>
           <div className={styles["card-detailed-info"]}>
             <p className={styles["price"]}>
-              ${currentPrice}{" "}
+              ${price}{" "}
               <span>{availableFor === "rent" ? "/month" : ""}</span>
             </p>
             <p className={styles["property-name"]}>{propertyName}</p>

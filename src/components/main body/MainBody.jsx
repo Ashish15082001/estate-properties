@@ -1,22 +1,14 @@
 import React from "react";
 import styles from "./MainBody.module.css";
 import Grid from "../grid/Grid";
-import ArrowDownIcon from "../../icons/ArrowDownIcon";
 import Filter from "../filter/Filter";
+import FlexInputLabelContainer from "../flex input label container/FlexInputLabelContainer";
 
-function MainBody({ propertiesIds, megaLabel }) {
+function MainBody({ propertiesIds, megaLabel, handleApplyFilter }) {
   return (
     <div className={styles["main-body"]}>
-      <div className={styles["flex-container"]}>
-        <h1>{megaLabel}</h1>
-        <div className={styles["input-container"]}>
-          <input placeholder="Seach with Seach Bar" />
-          <span>
-            <ArrowDownIcon />
-          </span>
-        </div>
-      </div>
-      <Filter />
+      <FlexInputLabelContainer megaLabel={megaLabel} />
+      <Filter handleApplyFilter={handleApplyFilter} />
       <Grid propertiesIds={propertiesIds} />
     </div>
   );

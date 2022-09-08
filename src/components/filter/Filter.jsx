@@ -1,27 +1,24 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ArrowDownIcon from "../../icons/ArrowDownIcon";
 import CalendarIcon from "../../icons/CalendarIcon";
-import { setFilterForRent } from "../../store/slices/properties/propertiesSlice";
+import {
+  setFilterLocation,
+  setFilterPriceRange,
+  setFilterPropertyType,
+} from "../../store/slices/properties/propertiesSlice";
 import Button from "../button/Button";
 import styles from "./Filter.module.css";
 
-function Filter() {
+function Filter({ handleApplyFilter }) {
   const dispatch = useDispatch();
   const [isLocationMenuVisible, setIsLocationMenuVisible] = useState(false);
   const [isPriceMenuVisible, setIsPriceMenuVisible] = useState(false);
   const [isPropertyTypeMenuVisible, setIsPropertyTypeMenuVisible] =
     useState(false);
-  const [location, setLocation] = useState(null);
-  const [plannedDate, setPlannedDate] = useState(null);
-  const [propertyType, setPropertyType] = useState(null);
-  const [priceRange, setPriceRange] = useState(null);
-
-  function handleSearch() {
-    dispatch(
-      setFilterForRent({ priceRange, propertyType, location, plannedDate })
-    );
-  }
+  const { location, plannedDate, propertyType, priceRange } = useSelector(
+    (state) => state.properties.filter
+  );
 
   return (
     <div className={styles["filter-container"]}>
@@ -50,7 +47,7 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  setLocation("New York, USA");
+                  dispatch(setFilterLocation({ location: "New York, USA" }));
                 }}
               >
                 New York, USA
@@ -59,7 +56,7 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  setLocation("Manitoba, Canada");
+                  dispatch(setFilterLocation({ location: "Manitoba, Canada" }));
                 }}
               >
                 Manitoba, Canada
@@ -68,7 +65,7 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  setLocation("Indiana, Canada");
+                  dispatch(setFilterLocation({ location: "Indiana, Canada" }));
                 }}
               >
                 Indiana, Canada
@@ -77,7 +74,7 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  setLocation("Indiana, USA");
+                  dispatch(setFilterLocation({ location: "Indiana, USA" }));
                 }}
               >
                 Indiana, USA
@@ -86,7 +83,7 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  setLocation("Florida, USA");
+                  dispatch(setFilterLocation({ location: "Florida, USA" }));
                 }}
               >
                 Florida, USA
@@ -125,7 +122,9 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 0, max: 1000 });
+                  dispatch(
+                    setFilterPriceRange({ priceRange: { min: 0, max: 1000 } })
+                  );
                 }}
               >
                 $0 - $1000
@@ -134,7 +133,11 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 1000, max: 2000 });
+                  dispatch(
+                    setFilterPriceRange({
+                      priceRange: { min: 1000, max: 2000 },
+                    })
+                  );
                 }}
               >
                 $1000 - $2000
@@ -143,7 +146,11 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 2000, max: 3000 });
+                  dispatch(
+                    setFilterPriceRange({
+                      priceRange: { min: 2000, max: 3000 },
+                    })
+                  );
                 }}
               >
                 $2000 - $3000
@@ -152,7 +159,11 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 3000, max: 4000 });
+                  dispatch(
+                    setFilterPriceRange({
+                      priceRange: { min: 3000, max: 4000 },
+                    })
+                  );
                 }}
               >
                 $3000 - $4000
@@ -161,7 +172,11 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 4000, max: 5000 });
+                  dispatch(
+                    setFilterPriceRange({
+                      priceRange: { min: 4000, max: 5000 },
+                    })
+                  );
                 }}
               >
                 $4000 - $5000
@@ -170,7 +185,11 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 5000, max: 6000 });
+                  dispatch(
+                    setFilterPriceRange({
+                      priceRange: { min: 5000, max: 6000 },
+                    })
+                  );
                 }}
               >
                 $5000 - $6000
@@ -179,7 +198,11 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 6000, max: 7000 });
+                  dispatch(
+                    setFilterPriceRange({
+                      priceRange: { min: 6000, max: 7000 },
+                    })
+                  );
                 }}
               >
                 $6000 - $7000
@@ -188,7 +211,11 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 7000, max: 8000 });
+                  dispatch(
+                    setFilterPriceRange({
+                      priceRange: { min: 7000, max: 8000 },
+                    })
+                  );
                 }}
               >
                 $7000 - $8000
@@ -197,7 +224,11 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 8000, max: 9000 });
+                  dispatch(
+                    setFilterPriceRange({
+                      priceRange: { min: 8000, max: 9000 },
+                    })
+                  );
                 }}
               >
                 $8000 - $9000
@@ -206,7 +237,11 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPriceMenuVisible(false);
-                  setPriceRange({ min: 9000, max: 10000 });
+                  dispatch(
+                    setFilterPriceRange({
+                      priceRange: { min: 9000, max: 10000 },
+                    })
+                  );
                 }}
               >
                 $9000 - $10000
@@ -238,7 +273,9 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPropertyTypeMenuVisible(false);
-                  setPropertyType("Apartment");
+                  dispatch(
+                    setFilterPropertyType({ propertyType: "Apartment" })
+                  );
                 }}
               >
                 Apartment
@@ -247,7 +284,7 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPropertyTypeMenuVisible(false);
-                  setPropertyType("House");
+                  dispatch(setFilterPropertyType({ propertyType: "House" }));
                 }}
               >
                 House
@@ -256,7 +293,9 @@ function Filter() {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPropertyTypeMenuVisible(false);
-                  setPropertyType("Townhouse");
+                  dispatch(
+                    setFilterPropertyType({ propertyType: "Townhouse" })
+                  );
                 }}
               >
                 Townhouse
@@ -266,7 +305,7 @@ function Filter() {
         </li>
       </ul>
       <div>
-        <Button label="Search" type="primary" onClick={handleSearch} />
+        <Button label="Search" type="primary" onClick={handleApplyFilter} />
       </div>
     </div>
   );
