@@ -1,0 +1,25 @@
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.properties-count,
+.remove-filter {
+  font-size: var(--font-medium);
+}
+
+.properties-count {
+  color: var(--color-font);
+}
+
+.properties-count > span {
+  font-weight: var(--font-bold);
+  margin-left: 1rem;
+}
+
+.remove-filter {
+  color: var(--color-primary);
+  cursor: pointer;
+}

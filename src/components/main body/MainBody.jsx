@@ -6,6 +6,7 @@ import FlexInputLabelContainer from "../flex input label container/FlexInputLabe
 import { useDispatch } from "react-redux";
 import { resetFilter } from "../../store/slices/properties/propertiesSlice";
 import { toast } from "react-toastify";
+import FlexLabelClickableContainer from "../flex label clickable container/FlexLabelClickableContainer";
 
 function MainBody({ propertiesIds, megaLabel, handleApplyFilter }) {
   const dispatch = useDispatch();
@@ -27,14 +28,11 @@ function MainBody({ propertiesIds, megaLabel, handleApplyFilter }) {
     <div className={styles["main-body"]}>
       <FlexInputLabelContainer megaLabel={megaLabel} />
       <Filter handleApplyFilter={handleApplyFilter} />
-      <div className={styles["flex-container"]}>
-        <p className={styles["properties-count"]}>
-          Total Number of Properties :<span>{propertiesIds.length}</span>
-        </p>
-        <p className={styles["remove-filter"]} onClick={removeFilters}>
-          Remove all filters
-        </p>
-      </div>
+      <FlexLabelClickableContainer
+        label={`Total numbers of properties : ${propertiesIds.length}`}
+        handleClick={removeFilters}
+        clickableLabel="Remove filters"
+      />
       <Grid propertiesIds={propertiesIds} />
     </div>
   );
