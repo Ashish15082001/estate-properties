@@ -14,6 +14,8 @@ export const fetchPropertiesToRentThunk = createAsyncThunk(
     //   throw new Error("Something went Wrong. Please try again.");
 
     // return { entities: responseData };
-    return { entities: propertiesForRent };
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve({ entities: propertiesForRent }), 3000);
+    });
   }
 );
