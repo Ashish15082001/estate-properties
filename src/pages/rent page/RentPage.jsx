@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import MainBody from "../../components/main body/MainBody";
 import { dataStatus } from "../../constants/dataStatus";
 import { fetchPropertiesToRentThunk } from "../../store/slices/properties/fetchPropertiesToRentThunk";
@@ -26,12 +26,12 @@ function RentPage() {
 
       if (promise.error) throw new Error();
     }
-    if (isPropertiesToRentIdsEmpty)
-      toast.promise(fetchPropertiesToRent, {
-        pending: "Fetching properties to rent.",
-        success: "Successfully fetched properties to rent.",
-        error: "Failed to fetch properties to rent.",
-      });
+    if (isPropertiesToRentIdsEmpty) fetchPropertiesToRent();
+    // toast.promise(fetchPropertiesToRent, {
+    //   pending: "Fetching properties to rent.",
+    //   success: "Successfully fetched properties to rent.",
+    //   error: "Failed to fetch properties to rent.",
+    // });
   }, [dispatch, isPropertiesToRentIdsEmpty]);
 
   if (status === dataStatus.fetching)
