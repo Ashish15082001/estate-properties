@@ -4,7 +4,9 @@ export const fetchPropertiesToRentThunk = createAsyncThunk(
   "propertiesToRent/fetchPropertiesToRent",
   async () => {
     // try {
-    const response = await fetch("http://localhost:3001/propertiesToRent");
+    const response = await fetch(
+      "https://estates-properties-by-ashish.herokuapp.com/propertiesToRent"
+    );
     const responseData = await response.json();
 
     if (response.ok === false)
