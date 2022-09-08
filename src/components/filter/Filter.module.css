@@ -16,7 +16,7 @@
 .filter-option {
   position: relative;
   padding-inline: 2rem;
-  border-right: 0.1rem solid var(--color-font-faded);
+  border-right: var(--border);
 }
 
 .filter-option:first-child {

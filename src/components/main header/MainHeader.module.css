@@ -1,6 +1,6 @@
 .main-header {
   background-color: var(--color-secondary);
-  border: 0.1rem solid var(--color-border);
+  border-bottom: var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;

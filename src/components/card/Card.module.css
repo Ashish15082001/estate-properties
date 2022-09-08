@@ -105,7 +105,7 @@
 .card-short-info-container {
   height: 7rem;
   padding-top: 2rem;
-  border-top: 0.1rem solid var(--color-font-faded);
+  border-top: var(--border);
   display: grid;
   align-content: flex-start;
 }

@@ -2,5 +2,17 @@
   width: 95%;
   max-width: 126rem;
   margin-inline: auto;
+  animation: mountAnimation 1s;
   /* border: 1px solid red; */
+}
+
+@keyframes mountAnimation {
+  0% {
+    transform: translateY(4rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
