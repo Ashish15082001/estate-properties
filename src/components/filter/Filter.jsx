@@ -10,14 +10,14 @@ import {
 import Button from "../button/Button";
 import styles from "./Filter.module.css";
 
-function Filter({ handleApplyFilter }) {
+function Filter({ filterFor }) {
   const dispatch = useDispatch();
   const [isLocationMenuVisible, setIsLocationMenuVisible] = useState(false);
   const [isPriceMenuVisible, setIsPriceMenuVisible] = useState(false);
   const [isPropertyTypeMenuVisible, setIsPropertyTypeMenuVisible] =
     useState(false);
-  const { location, plannedDate, propertyType, priceRange } = useSelector(
-    (state) => state.properties.filter
+  const { location, when, propertyType, price } = useSelector(
+    (state) => state.properties.filters[filterFor]
   );
 
   return (
@@ -47,7 +47,9 @@ function Filter({ handleApplyFilter }) {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  dispatch(setFilterLocation({ location: "New York, USA" }));
+                  dispatch(
+                    setFilterLocation({ location: "New York, USA", filterFor })
+                  );
                 }}
               >
                 New York, USA
@@ -56,7 +58,12 @@ function Filter({ handleApplyFilter }) {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  dispatch(setFilterLocation({ location: "Manitoba, Canada" }));
+                  dispatch(
+                    setFilterLocation({
+                      location: "Manitoba, Canada",
+                      filterFor,
+                    })
+                  );
                 }}
               >
                 Manitoba, Canada
@@ -65,7 +72,12 @@ function Filter({ handleApplyFilter }) {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  dispatch(setFilterLocation({ location: "Indiana, Canada" }));
+                  dispatch(
+                    setFilterLocation({
+                      location: "Indiana, Canada",
+                      filterFor,
+                    })
+                  );
                 }}
               >
                 Indiana, Canada
@@ -74,7 +86,9 @@ function Filter({ handleApplyFilter }) {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  dispatch(setFilterLocation({ location: "Indiana, USA" }));
+                  dispatch(
+                    setFilterLocation({ location: "Indiana, USA", filterFor })
+                  );
                 }}
               >
                 Indiana, USA
@@ -83,7 +97,9 @@ function Filter({ handleApplyFilter }) {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsLocationMenuVisible(false);
-                  dispatch(setFilterLocation({ location: "Florida, USA" }));
+                  dispatch(
+                    setFilterLocation({ location: "Florida, USA", filterFor })
+                  );
                 }}
               >
                 Florida, USA
@@ -95,7 +111,7 @@ function Filter({ handleApplyFilter }) {
         <li className={styles["filter-option"]}>
           <p>When</p>
           <h5>
-            {plannedDate ? plannedDate : "Select Move-in Date"}
+            {when ? when : "Select Move-in Date"}
             <span>
               <CalendarIcon />
             </span>
@@ -105,9 +121,7 @@ function Filter({ handleApplyFilter }) {
         <li className={styles["filter-option"]}>
           <p>Price</p>
           <h5>
-            {priceRange
-              ? `${priceRange.min} - ${priceRange.max}`
-              : "Select Price"}
+            {price ? `${price.min} - ${price.max}` : "Select Price"}
             <span
               onClick={() =>
                 setIsPriceMenuVisible((currentVisibility) => !currentVisibility)
@@ -123,7 +137,10 @@ function Filter({ handleApplyFilter }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({ priceRange: { min: 0, max: 1000 } })
+                    setFilterPriceRange({
+                      price: { min: 0, max: 1000 },
+                      filterFor,
+                    })
                   );
                 }}
               >
@@ -135,7 +152,8 @@ function Filter({ handleApplyFilter }) {
                   setIsPriceMenuVisible(false);
                   dispatch(
                     setFilterPriceRange({
-                      priceRange: { min: 1000, max: 2000 },
+                      price: { min: 1000, max: 2000 },
+                      filterFor,
                     })
                   );
                 }}
@@ -148,7 +166,8 @@ function Filter({ handleApplyFilter }) {
                   setIsPriceMenuVisible(false);
                   dispatch(
                     setFilterPriceRange({
-                      priceRange: { min: 2000, max: 3000 },
+                      price: { min: 2000, max: 3000 },
+                      filterFor,
                     })
                   );
                 }}
@@ -161,7 +180,8 @@ function Filter({ handleApplyFilter }) {
                   setIsPriceMenuVisible(false);
                   dispatch(
                     setFilterPriceRange({
-                      priceRange: { min: 3000, max: 4000 },
+                      price: { min: 3000, max: 4000 },
+                      filterFor,
                     })
                   );
                 }}
@@ -174,7 +194,8 @@ function Filter({ handleApplyFilter }) {
                   setIsPriceMenuVisible(false);
                   dispatch(
                     setFilterPriceRange({
-                      priceRange: { min: 4000, max: 5000 },
+                      price: { min: 4000, max: 5000 },
+                      filterFor,
                     })
                   );
                 }}
@@ -187,7 +208,8 @@ function Filter({ handleApplyFilter }) {
                   setIsPriceMenuVisible(false);
                   dispatch(
                     setFilterPriceRange({
-                      priceRange: { min: 5000, max: 6000 },
+                      price: { min: 5000, max: 6000 },
+                      filterFor,
                     })
                   );
                 }}
@@ -200,7 +222,8 @@ function Filter({ handleApplyFilter }) {
                   setIsPriceMenuVisible(false);
                   dispatch(
                     setFilterPriceRange({
-                      priceRange: { min: 6000, max: 7000 },
+                      price: { min: 6000, max: 7000 },
+                      filterFor,
                     })
                   );
                 }}
@@ -213,7 +236,8 @@ function Filter({ handleApplyFilter }) {
                   setIsPriceMenuVisible(false);
                   dispatch(
                     setFilterPriceRange({
-                      priceRange: { min: 7000, max: 8000 },
+                      price: { min: 7000, max: 8000 },
+                      filterFor,
                     })
                   );
                 }}
@@ -226,7 +250,8 @@ function Filter({ handleApplyFilter }) {
                   setIsPriceMenuVisible(false);
                   dispatch(
                     setFilterPriceRange({
-                      priceRange: { min: 8000, max: 9000 },
+                      price: { min: 8000, max: 9000 },
+                      filterFor,
                     })
                   );
                 }}
@@ -239,7 +264,8 @@ function Filter({ handleApplyFilter }) {
                   setIsPriceMenuVisible(false);
                   dispatch(
                     setFilterPriceRange({
-                      priceRange: { min: 9000, max: 10000 },
+                      price: { min: 9000, max: 10000 },
+                      filterFor,
                     })
                   );
                 }}
@@ -274,7 +300,10 @@ function Filter({ handleApplyFilter }) {
                 onClick={() => {
                   setIsPropertyTypeMenuVisible(false);
                   dispatch(
-                    setFilterPropertyType({ propertyType: "Apartment" })
+                    setFilterPropertyType({
+                      propertyType: "Apartment",
+                      filterFor,
+                    })
                   );
                 }}
               >
@@ -284,7 +313,9 @@ function Filter({ handleApplyFilter }) {
                 className={styles["menu-option"]}
                 onClick={() => {
                   setIsPropertyTypeMenuVisible(false);
-                  dispatch(setFilterPropertyType({ propertyType: "House" }));
+                  dispatch(
+                    setFilterPropertyType({ propertyType: "House", filterFor })
+                  );
                 }}
               >
                 House
@@ -294,7 +325,10 @@ function Filter({ handleApplyFilter }) {
                 onClick={() => {
                   setIsPropertyTypeMenuVisible(false);
                   dispatch(
-                    setFilterPropertyType({ propertyType: "Townhouse" })
+                    setFilterPropertyType({
+                      propertyType: "Townhouse",
+                      filterFor,
+                    })
                   );
                 }}
               >
@@ -308,8 +342,8 @@ function Filter({ handleApplyFilter }) {
         <Button
           label="Search"
           type="primary"
-          onClick={handleApplyFilter}
-          disabled={!location && !plannedDate && !priceRange && !propertyType}
+
+          // disabled={!location && !when && !price && !propertyType}
         />
       </div>
     </div>

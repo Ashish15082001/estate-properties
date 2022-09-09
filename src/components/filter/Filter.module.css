@@ -70,6 +70,7 @@
   opacity: 0;
   pointer-events: none;
   transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  pointer-events: none;
 }
 
 .menu[data-visible="true"] {

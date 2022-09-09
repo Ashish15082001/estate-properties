@@ -8,7 +8,7 @@ import { resetFilter } from "../../store/slices/properties/propertiesSlice";
 import { toast } from "react-toastify";
 import FlexLabelClickableContainer from "../flex label clickable container/FlexLabelClickableContainer";
 
-function MainBody({ propertiesIds, megaLabel, handleApplyFilter }) {
+function MainBody({ propertiesIds, megaLabel, filterFor }) {
   const dispatch = useDispatch();
 
   function removeFilters() {
@@ -21,13 +21,13 @@ function MainBody({ propertiesIds, megaLabel, handleApplyFilter }) {
       draggable: true,
       progress: undefined,
     });
-    dispatch(resetFilter());
+    dispatch(resetFilter({ filterFor }));
   }
 
   return (
     <div className={styles["main-body"]}>
       <FlexInputLabelContainer megaLabel={megaLabel} />
-      <Filter handleApplyFilter={handleApplyFilter} />
+      <Filter filterFor={filterFor} />
       <FlexLabelClickableContainer
         label={`Total numbers of properties : ${propertiesIds.length}`}
         handleClick={removeFilters}

@@ -2,27 +2,38 @@ import { createSlice } from "@reduxjs/toolkit";
 import { dataStatus } from "../../../constants/dataStatus";
 import { fetchPropertiesToRentThunk } from "./fetchPropertiesToRentThunk";
 
-const initialFilter = {
-  priceRange: null,
-  propertyType: null,
-  location: null,
-  plannedDate: null,
+const initialFilters = {
+  propertiesToRent: {
+    price: null,
+    propertyType: null,
+    location: null,
+    when: null,
+  },
+  favouriteProperties: {
+    price: null,
+    propertyType: null,
+    location: null,
+    when: null,
+  },
 };
 
 const initialState = {
   entities: {},
-  favouritePropertiesIds: {},
+  favouriteProperties: {
+    propertiesIds: {},
+    //  filteredPropertiesIds: []
+  },
   propertiesToRent: {
     propertiesIds: [],
-    filteredPropertiesIds: [],
+    // filteredPropertiesIds: [],
     status: dataStatus.idle,
   },
   propertiesToBuy: {
     propertiesIds: [],
-    filteredPropertiesIds: [],
+    // filteredPropertiesIds: [],
     status: dataStatus.idle,
   },
-  filter: initialFilter,
+  filters: initialFilters,
 };
 
 export const propertiesSlice = createSlice({
@@ -31,69 +42,64 @@ export const propertiesSlice = createSlice({
   reducers: {
     addPropertyToFavourite(state, action) {
       const { propertyId } = action.payload;
-      if (state.favouritePropertiesIds[propertyId])
-        delete state.favouritePropertiesIds[propertyId];
-      else state.favouritePropertiesIds[propertyId] = propertyId;
+      if (state.favouriteProperties.propertiesIds[propertyId])
+        delete state.favouriteProperties.propertiesIds[propertyId];
+      else state.favouriteProperties.propertiesIds[propertyId] = propertyId;
     },
     setFilterPriceRange(state, action) {
-      const { priceRange } = action.payload;
-      state.filter.priceRange = priceRange;
+      const { price, filterFor } = action.payload;
+      state.filters[filterFor].price = price;
     },
     setFilterPropertyType(state, action) {
-      const { propertyType } = action.payload;
-      state.filter.propertyType = propertyType;
+      const { propertyType, filterFor } = action.payload;
+      state.filters[filterFor].propertyType = propertyType;
     },
     setFilterLocation(state, action) {
-      const { location } = action.payload;
-      state.filter.location = location;
+      const { location, filterFor } = action.payload;
+      state.filters[filterFor].location = location;
     },
     setFilterPlannedDate(state, action) {
-      const { plannedDate } = action.payload;
-      state.filter.plannedDate = plannedDate;
+      const { when, filterFor } = action.payload;
+      state.filters[filterFor].when = when;
     },
-    resetFilter(state) {
-      state.filter = initialFilter;
-      state.propertiesToRent.filteredPropertiesIds =
-        state.propertiesToRent.propertiesIds;
-      state.propertiesToBuy.filteredPropertiesIds =
-        state.propertiesToBuy.propertiesIds;
+    resetFilter(state, action) {
+      const { filterFor } = action.payload;
+      state.filters[filterFor] = initialFilters[filterFor];
+      state[filterFor].filteredPropertiesIds = state[filterFor].propertiesIds;
     },
-    applyFilterToPropertiesToRent(state) {
-      const filteredPropertiesToRent = [];
-      const targetFilters = Object.keys(state.filter).filter(
-        (filterKey) => state.filter[filterKey] !== null
-      );
-
-      function isPropertyMatchingTargetFilters(propertyId) {
-        for (const targetFilter of targetFilters) {
-          if (targetFilter === "priceRange") {
-            if (
-              !(
-                state.entities[propertyId].price >=
-                  state.filter[targetFilter].min &&
-                state.entities[propertyId].price <=
-                  state.filter[targetFilter].max
-              )
-            )
-              return false;
-          } else {
-            if (
-              state.entities[propertyId][targetFilter] !==
-              state.filter[targetFilter]
-            )
-              return false;
-          }
-        }
-
-        return true;
-      }
-
-      state.propertiesToRent.propertiesIds.forEach((propertyId) => {
-        if (isPropertyMatchingTargetFilters(propertyId) === true)
-          filteredPropertiesToRent.push(propertyId);
-      });
-
-      state.propertiesToRent.filteredPropertiesIds = filteredPropertiesToRent;
+    applyFilterToProperties(state, action) {
+      //   const { filterFor } = action.payload;
+      //   const filteredPropertiesToRent = [];
+      //   const targetFilters = Object.keys(state.filter).filter(
+      //     (filterKey) => state.filter[filterKey] !== null
+      //   );
+      //   function isPropertyMatchingTargetFilters(propertyId) {
+      //     for (const targetFilter of targetFilters) {
+      //       if (targetFilter === "priceRange") {
+      //         if (
+      //           !(
+      //             state.entities[propertyId].price >=
+      //               state.filter[targetFilter].min &&
+      //             state.entities[propertyId].price <=
+      //               state.filter[targetFilter].max
+      //           )
+      //         )
+      //           return false;
+      //       } else {
+      //         if (
+      //           state.entities[propertyId][targetFilter] !==
+      //           state.filter[targetFilter]
+      //         )
+      //           return false;
+      //       }
+      //     }
+      //     return true;
+      //   }
+      //   state.propertiesToRent.propertiesIds.forEach((propertyId) => {
+      //     if (isPropertyMatchingTargetFilters(propertyId) === true)
+      //       filteredPropertiesToRent.push(propertyId);
+      //   });
+      //   state.propertiesToRent.filteredPropertiesIds = filteredPropertiesToRent;
     },
   },
   extraReducers: (builder) => {

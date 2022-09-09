@@ -3,7 +3,6 @@ import Card from "../card/Card";
 import styles from "./Grid.module.css";
 
 function Grid({ propertiesIds }) {
-  // console.log(propertiesIds);
   return (
     <div className={styles["grid-container"]}>
       {propertiesIds.length === 0 && (

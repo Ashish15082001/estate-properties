@@ -23,7 +23,9 @@ function Card({ propertyId }) {
   } = useSelector((state) => state.properties.entities[propertyId]);
   const dispatch = useDispatch();
   const isFavourite = useSelector((state) =>
-    state.properties.favouritePropertiesIds[propertyId] ? true : false
+    state.properties.favouriteProperties.propertiesIds[propertyId]
+      ? true
+      : false
   );
 
   function toggleFavourite() {
@@ -67,8 +69,7 @@ function Card({ propertyId }) {
           </div>
           <div className={styles["card-detailed-info"]}>
             <p className={styles["price"]}>
-              ${price}{" "}
-              <span>{availableFor === "rent" ? "/month" : ""}</span>
+              ${price} <span>{availableFor === "rent" ? "/month" : ""}</span>
             </p>
             <p className={styles["property-name"]}>{propertyName}</p>
           </div>

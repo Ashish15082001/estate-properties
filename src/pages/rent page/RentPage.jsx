@@ -2,32 +2,25 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import MainBody from "../../components/main body/MainBody";
-import { dataStatus } from "../../constants/dataStatus";
 import { fetchPropertiesToRentThunk } from "../../store/slices/properties/fetchPropertiesToRentThunk";
-import { applyFilterToPropertiesToRent } from "../../store/slices/properties/propertiesSlice";
-import PlaceHolderPage from "../placeholder page/PlaceHolderPage";
+import getFilteredProperties from "../../util/getFilteredProperties";
 
 function RentPage() {
   const dispatch = useDispatch();
-  const { filteredPropertiesIds: propertiesIds, status } = useSelector(
+  const { entities } = useSelector((state) => state.properties);
+  const { propertiesToRent: filters } = useSelector(
+    (state) => state.properties.filters
+  );
+  const { propertiesIds } = useSelector(
     (state) => state.properties.propertiesToRent
   );
-  const isPropertiesToRentIdsEmpty = useSelector(
-    (state) => state.properties.propertiesToRent.propertiesIds.length === 0
-  );
+  const isPropertiesToRentIdsEmpty = propertiesIds.length === 0;
 
-  function handleApplyFilter() {
-    toast(`Filteres have been applied`, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    dispatch(applyFilterToPropertiesToRent());
-  }
+  const filteredPropertiesIds = getFilteredProperties(
+    filters,
+    propertiesIds,
+    entities
+  );
 
   useEffect(() => {
     async function fetchPropertiesToRent() {
@@ -43,18 +36,11 @@ function RentPage() {
       });
   }, [dispatch, isPropertiesToRentIdsEmpty]);
 
-  if (status === dataStatus.fetching)
-    return (
-      <PlaceHolderPage
-        placeHolderText={"Fetching propeties to rent. Please wait."}
-      />
-    );
-
   return (
     <MainBody
-      propertiesIds={propertiesIds}
+      propertiesIds={filteredPropertiesIds}
       megaLabel="Search properties to rent"
-      handleApplyFilter={handleApplyFilter}
+      filterFor="propertiesToRent"
     />
   );
 }
