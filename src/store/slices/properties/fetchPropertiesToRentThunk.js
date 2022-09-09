@@ -15,7 +15,7 @@ export const fetchPropertiesToRentThunk = createAsyncThunk(
 
     // return { entities: responseData };
     return new Promise((resolve, reject) => {
-      setTimeout(() => resolve({ entities: propertiesForRent }), 3000);
+      setTimeout(() => resolve({ entities: propertiesForRent }), 5000);
     });
   }
 );
