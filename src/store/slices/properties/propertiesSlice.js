@@ -21,16 +21,13 @@ const initialState = {
   entities: {},
   favouriteProperties: {
     propertiesIds: {},
-    //  filteredPropertiesIds: []
   },
   propertiesToRent: {
     propertiesIds: [],
-    // filteredPropertiesIds: [],
     status: dataStatus.idle,
   },
   propertiesToBuy: {
     propertiesIds: [],
-    // filteredPropertiesIds: [],
     status: dataStatus.idle,
   },
   filters: initialFilters,
