@@ -1,8 +1,12 @@
 import React from "react";
+import { useEffect } from "react";
 import Card from "../card/Card";
 import styles from "./Grid.module.css";
 
 function Grid({ propertiesIds }) {
+  console.log("rendering Grid...");
+  useEffect(() => console.log("rendered Grid..."));
+
   return (
     <div className={styles["grid-container"]}>
       {propertiesIds.length === 0 && (

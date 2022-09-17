@@ -1,12 +1,9 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ArrowDownIcon from "../../icons/ArrowDownIcon";
 import CalendarIcon from "../../icons/CalendarIcon";
-import {
-  setFilterLocation,
-  setFilterPriceRange,
-  setFilterPropertyType,
-} from "../../store/slices/properties/propertiesSlice";
+import { filterChanged } from "../../store/slices/filters/filtersSlice";
 import Button from "../button/Button";
 import styles from "./Filter.module.css";
 
@@ -17,8 +14,11 @@ function Filter({ filterFor }) {
   const [isPropertyTypeMenuVisible, setIsPropertyTypeMenuVisible] =
     useState(false);
   const { location, when, propertyType, price } = useSelector(
-    (state) => state.properties.filters[filterFor]
+    (state) => state.filters[filterFor]
   );
+
+  console.log("rendering Filter...");
+  useEffect(() => console.log("rendered Filter..."));
 
   return (
     <div className={styles["filter-container"]}>
@@ -48,7 +48,11 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsLocationMenuVisible(false);
                   dispatch(
-                    setFilterLocation({ location: "New York, USA", filterFor })
+                    filterChanged({
+                      filterFor,
+                      filter: "location",
+                      filterValue: "New York, USA",
+                    })
                   );
                 }}
               >
@@ -59,9 +63,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsLocationMenuVisible(false);
                   dispatch(
-                    setFilterLocation({
-                      location: "Manitoba, Canada",
+                    filterChanged({
                       filterFor,
+                      filter: "location",
+                      filterValue: "Manitoba, Canada",
                     })
                   );
                 }}
@@ -73,9 +78,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsLocationMenuVisible(false);
                   dispatch(
-                    setFilterLocation({
-                      location: "Indiana, Canada",
+                    filterChanged({
                       filterFor,
+                      filter: "location",
+                      filterValue: "Indiana, Canada",
                     })
                   );
                 }}
@@ -87,7 +93,11 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsLocationMenuVisible(false);
                   dispatch(
-                    setFilterLocation({ location: "Indiana, USA", filterFor })
+                    filterChanged({
+                      filterFor,
+                      filter: "location",
+                      filterValue: "Indiana, USA",
+                    })
                   );
                 }}
               >
@@ -98,7 +108,11 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsLocationMenuVisible(false);
                   dispatch(
-                    setFilterLocation({ location: "Florida, USA", filterFor })
+                    filterChanged({
+                      filterFor,
+                      filter: "location",
+                      filterValue: "Florida, USA",
+                    })
                   );
                 }}
               >
@@ -137,9 +151,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 0, max: 1000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 0, max: 1000 },
                     })
                   );
                 }}
@@ -151,9 +166,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 1000, max: 2000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 1000, max: 2000 },
                     })
                   );
                 }}
@@ -165,9 +181,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 2000, max: 3000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 2000, max: 3000 },
                     })
                   );
                 }}
@@ -179,9 +196,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 3000, max: 4000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 3000, max: 4000 },
                     })
                   );
                 }}
@@ -193,9 +211,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 4000, max: 5000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 4000, max: 5000 },
                     })
                   );
                 }}
@@ -207,9 +226,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 5000, max: 6000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 5000, max: 6000 },
                     })
                   );
                 }}
@@ -221,9 +241,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 6000, max: 7000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 6000, max: 7000 },
                     })
                   );
                 }}
@@ -235,9 +256,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 7000, max: 8000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 7000, max: 8000 },
                     })
                   );
                 }}
@@ -249,9 +271,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 8000, max: 9000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 8000, max: 9000 },
                     })
                   );
                 }}
@@ -263,9 +286,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPriceMenuVisible(false);
                   dispatch(
-                    setFilterPriceRange({
-                      price: { min: 9000, max: 10000 },
+                    filterChanged({
                       filterFor,
+                      filter: "price",
+                      filterValue: { min: 9000, max: 10000 },
                     })
                   );
                 }}
@@ -300,9 +324,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPropertyTypeMenuVisible(false);
                   dispatch(
-                    setFilterPropertyType({
-                      propertyType: "Apartment",
+                    filterChanged({
                       filterFor,
+                      filter: "propertyType",
+                      filterValue: "Apartment",
                     })
                   );
                 }}
@@ -314,7 +339,11 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPropertyTypeMenuVisible(false);
                   dispatch(
-                    setFilterPropertyType({ propertyType: "House", filterFor })
+                    filterChanged({
+                      filterFor,
+                      filter: "propertyType",
+                      filterValue: "House",
+                    })
                   );
                 }}
               >
@@ -325,9 +354,10 @@ function Filter({ filterFor }) {
                 onClick={() => {
                   setIsPropertyTypeMenuVisible(false);
                   dispatch(
-                    setFilterPropertyType({
-                      propertyType: "Townhouse",
+                    filterChanged({
                       filterFor,
+                      filter: "propertyType",
+                      filterValue: "Townhouse",
                     })
                   );
                 }}

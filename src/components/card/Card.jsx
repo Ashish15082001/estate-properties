@@ -9,24 +9,24 @@ import styles from "./Card.module.css";
 import AddToFavouriteIcon from "../../icons/AddToFavouriteIcon";
 import FavouriteIcon from "../../icons/FavouriteIcon";
 import { toast } from "react-toastify";
+import getPropertyDetailsSelector from "../../selectors/getPropertyDetailsSelector";
+import { useEffect } from "react";
 
 function Card({ propertyId }) {
-  const {
-    price,
-    availableFor,
-    imageUrl,
-    propertyName,
-    bedRooms,
-    bathRooms,
-    area,
-    address,
-  } = useSelector((state) => state.properties.entities[propertyId]);
   const dispatch = useDispatch();
-  const isFavourite = useSelector((state) =>
-    state.properties.favouriteProperties.propertiesIds[propertyId]
-      ? true
-      : false
-  );
+  const {
+    propertyDetails: {
+      price,
+      availableFor,
+      imageUrl,
+      propertyName,
+      bedRooms,
+      bathRooms,
+      area,
+      address,
+    },
+    isFavourite,
+  } = useSelector(getPropertyDetailsSelector(propertyId));
 
   function toggleFavourite() {
     dispatch(addPropertyToFavourite({ propertyId }));
@@ -50,6 +50,9 @@ function Card({ propertyId }) {
           progress: undefined,
         });
   }
+
+  console.log("rendering Card...");
+  useEffect(() => console.log("rendered Card..."));
 
   return (
     <div className={styles["card"]}>

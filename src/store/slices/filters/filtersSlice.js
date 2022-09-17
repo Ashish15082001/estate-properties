@@ -19,8 +19,15 @@ export const filtersSlice = createSlice({
   initialState: initialFilters,
   reducers: {
     filterChanged(state, action) {
-      const { changedFor, filter, filterValue } = action.payload;
-      state[changedFor][filter] = filterValue;
+      const { filterFor, filter, filterValue } = action.payload;
+      state[filterFor][filter] = filterValue;
+    },
+    filterReset(state, action) {
+      const { filterFor } = action.payload;
+      state[filterFor] = initialFilter;
     },
   },
 });
+
+export const { filterChanged, filterReset } = filtersSlice.actions;
+export const filtersSliceReducer = filtersSlice.reducer;

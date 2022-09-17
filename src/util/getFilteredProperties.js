@@ -1,8 +1,8 @@
 import isFilterable from "./isPropertyFilterable";
 
-function getFilteredProperties(filters, propertiesIds, properties) {
+function getFilteredProperties(filters, propertiesIds, entities) {
   return propertiesIds.filter((propertyId) =>
-    isFilterable(filters, propertyId, properties)
+    isFilterable(filters, propertyId, entities)
   );
 }
 

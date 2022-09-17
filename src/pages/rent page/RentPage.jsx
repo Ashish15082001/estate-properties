@@ -2,24 +2,17 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import MainBody from "../../components/main body/MainBody";
+import getArePropertiesAvailableSelector from "../../selectors/getArePropertiesAvailableSelector";
+import getPropertiesIdsSelector from "../../selectors/getPropertiesIdsSelector";
 import { fetchPropertiesToRentThunk } from "../../store/slices/properties/fetchPropertiesToRentThunk";
-import getFilteredProperties from "../../util/getFilteredProperties";
 
 function RentPage() {
   const dispatch = useDispatch();
-  const { entities } = useSelector((state) => state.properties);
-  const { propertiesToRent: filters } = useSelector(
-    (state) => state.properties.filters
+  const propertiesIds = useSelector(
+    getPropertiesIdsSelector("propertiesToRent")
   );
-  const { propertiesIds } = useSelector(
-    (state) => state.properties.propertiesToRent
-  );
-  const isPropertiesToRentIdsEmpty = propertiesIds.length === 0;
-
-  const filteredPropertiesIds = getFilteredProperties(
-    filters,
-    propertiesIds,
-    entities
+  const arePropertiesAvailable = useSelector(
+    getArePropertiesAvailableSelector("propertiesToRent")
   );
 
   useEffect(() => {
@@ -28,17 +21,20 @@ function RentPage() {
 
       if (promise.error) throw new Error();
     }
-    if (isPropertiesToRentIdsEmpty)
+    if (arePropertiesAvailable === false)
       toast.promise(fetchPropertiesToRent, {
         pending: "Fetching properties to rent.",
         success: "Successfully fetched properties to rent.",
         error: "Failed to fetch properties to rent.",
       });
-  }, [dispatch, isPropertiesToRentIdsEmpty]);
+  }, [dispatch, arePropertiesAvailable]);
+
+  console.log("rendering rent page...");
+  useEffect(() => console.log("rendered rent page..."));
 
   return (
     <MainBody
-      propertiesIds={filteredPropertiesIds}
+      propertiesIds={propertiesIds}
       megaLabel="Search properties to rent"
       filterFor="propertiesToRent"
     />

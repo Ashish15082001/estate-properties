@@ -1,4 +1,4 @@
-function isFilterable(filters, propertyId, properties) {
+function isFilterable(filters, propertyId, entities) {
   const targetFilters = Object.keys(filters).filter(
     (filterValue) => filters[filterValue] !== null
   );
@@ -7,13 +7,13 @@ function isFilterable(filters, propertyId, properties) {
     if (targetFilter === "price") {
       if (
         !(
-          properties[propertyId].price >= filters[targetFilter].min &&
-          properties[propertyId].price <= filters[targetFilter].max
+          entities[propertyId].price >= filters[targetFilter].min &&
+          entities[propertyId].price <= filters[targetFilter].max
         )
       )
         return false;
     } else {
-      if (properties[propertyId][targetFilter] !== filters[targetFilter])
+      if (entities[propertyId][targetFilter] !== filters[targetFilter])
         return false;
     }
   }

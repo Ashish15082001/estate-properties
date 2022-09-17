@@ -1,8 +1,12 @@
 import React from "react";
+import { useEffect } from "react";
 import ArrowDownIcon from "../../icons/ArrowDownIcon";
 import styles from "./FlexInputLabelContainer.module.css";
 
 function FlexInputLabelContainer({ megaLabel }) {
+  console.log("rendering FlexInputLabelContainer...");
+  useEffect(() => console.log("rendered FlexInputLabelContainer..."));
+
   return (
     <div className={styles["flex-container"]}>
       <h1>{megaLabel}</h1>

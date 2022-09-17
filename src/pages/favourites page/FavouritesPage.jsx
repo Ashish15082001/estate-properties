@@ -1,26 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import MainBody from "../../components/main body/MainBody";
-import getFilteredProperties from "../../util/getFilteredProperties";
+import getPropertiesIdsSelector from "../../selectors/getPropertiesIdsSelector";
 
 function FavouritesPage() {
-  const { entities } = useSelector((state) => state.properties);
-  const { favouriteProperties: filters } = useSelector(
-    (state) => state.properties.filters
-  );
-  const favouritePropertiesIds = useSelector((state) =>
-    Object.keys(state.properties.favouriteProperties.propertiesIds)
-  );
-
-  const filteredPropertiesIds = getFilteredProperties(
-    filters,
-    favouritePropertiesIds,
-    entities
+  const propertiesIds = useSelector(
+    getPropertiesIdsSelector("favouriteProperties")
   );
 
   return (
     <MainBody
-      propertiesIds={filteredPropertiesIds}
+      propertiesIds={propertiesIds}
       megaLabel="Search favourite properties"
       filterFor="favouriteProperties"
     />
