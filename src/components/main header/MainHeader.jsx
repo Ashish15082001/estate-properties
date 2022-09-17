@@ -8,8 +8,8 @@ import { useEffect } from "react";
 function MainHeader() {
   const { pathname } = useLocation();
 
-  console.log("rendering App...");
-  useEffect(() => console.log("rendered App..."));
+  console.log("rendering MainHeader...");
+  useEffect(() => console.log("rendered MainHeader..."));
   return (
     <header className={styles["main-header"]}>
       <div className={styles["nav-logo-container"]}>
