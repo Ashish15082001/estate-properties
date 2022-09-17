@@ -4,8 +4,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import RentPage from "./pages/rent page/RentPage";
 import PlaceHolderPage from "./pages/placeholder page/PlaceHolderPage";
 import FavouritesPage from "./pages/favourites page/FavouritesPage";
+import { useEffect } from "react";
 
 function App() {
+  console.log("rendering App...");
+  useEffect(() => console.log("rendered App..."));
+
   return (
     <React.Fragment>
       <MainHeader />

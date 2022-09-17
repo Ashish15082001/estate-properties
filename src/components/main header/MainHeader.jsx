@@ -3,10 +3,13 @@ import Button from "../button/Button";
 import styles from "./MainHeader.module.css";
 import { Link, useLocation } from "react-router-dom";
 import ArrowDownIcon from "../../icons/ArrowDownIcon";
+import { useEffect } from "react";
 
 function MainHeader() {
   const { pathname } = useLocation();
 
+  console.log("rendering App...");
+  useEffect(() => console.log("rendered App..."));
   return (
     <header className={styles["main-header"]}>
       <div className={styles["nav-logo-container"]}>
